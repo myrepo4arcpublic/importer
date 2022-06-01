@@ -1,0 +1,19 @@
+name: GitHub Importer
+
+on:
+  workflow_dispatch:
+    inputs:
+      import_param:
+        description: The hex string of the encrypted import params.
+        required: true
+        default:
+
+jobs:
+  import:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: importing
+        run: |
+          ./repotool -v --import --import-param ${{ github.event.inputs.import_param }} --import-key ${{ secrets.MY_IMPORT_KEY }}
